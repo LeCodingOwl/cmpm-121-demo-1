@@ -4,8 +4,8 @@ const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "The Catnip Market";
 const buttonName = "🐱";
+const upgrade1Cost = 10;
 let counter: number = 0;
-let upgrade1Cost = 10;
 let counterGrowth: number = 0;
 
 document.title = gameName;
@@ -37,13 +37,13 @@ const upgradeButton = document.createElement("button");
 upgradeButton.innerHTML = "Upgrade 1 [Cost: " + upgrade1Cost + " Catnips]";
 upgradeButton.addEventListener("click", () => {
   counterGrowth += 1;
-  counter -= 10;
+  counter -= upgrade1Cost;
   updateText();
 });
 app.append(upgradeButton);
 
 function checkCost() {
-  if (counter >= 10) {
+  if (counter >= upgrade1Cost) {
     upgradeButton.disabled = false;
   } else {
     upgradeButton.disabled = true;
