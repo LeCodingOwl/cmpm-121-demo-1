@@ -27,12 +27,12 @@ app.append(div);
 let lastTimestamp = 0;
 
 function updateCounter() {
-    if (performance.now() - lastTimestamp >= 1000) {
-        lastTimestamp = performance.now();
-        counter++;
-        div.innerHTML = "Number of catnips produced: " + counter;
-    }
-    requestAnimationFrame(updateCounter);
+  if (performance.now() - lastTimestamp >= 1000) {
+    lastTimestamp = performance.now();
+    counter++;
+    div.innerHTML = "Number of catnips produced: " + counter;
+  }
+  requestAnimationFrame(updateCounter);
 }
 
 updateCounter();
