@@ -5,8 +5,14 @@ const app: HTMLDivElement = document.querySelector("#app")!;
 const gameName = "The Catnip Market";
 const buttonName = "🐱";
 let counter: number = 0;
+let upgrade1Cost = 10;
+let counterGrowth: number = 0;
 
 document.title = gameName;
+
+function updateText() {
+  div.innerHTML = "Number of catnips produced: " + counter;
+}
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
@@ -16,7 +22,7 @@ const button = document.createElement("button");
 button.innerHTML = buttonName;
 button.addEventListener("click", () => {
   counter++;
-  div.innerHTML = "Number of catnips produced: " + counter;
+  updateText();
 });
 app.append(button);
 
@@ -26,13 +32,31 @@ app.append(div);
 
 let lastTimestamp = 0;
 
-function updateCounter() {
-  if (performance.now() - lastTimestamp >= 1000) {
-    lastTimestamp = performance.now();
-    counter++;
-    div.innerHTML = "Number of catnips produced: " + counter;
+const upgradeButton = document.createElement("button");
+
+upgradeButton.innerHTML = "Upgrade 1 [Cost: " + upgrade1Cost + " Catnips]";
+upgradeButton.addEventListener("click", () => {
+  counterGrowth += 1;
+  counter -= 10;
+  updateText();
+});
+app.append(upgradeButton);
+
+function checkCost() {
+  if (counter >= 10) {
+    upgradeButton.disabled = false;
+  } else {
+    upgradeButton.disabled = true;
   }
-  requestAnimationFrame(updateCounter);
 }
 
-updateCounter();
+function autoCounter() {
+  if (performance.now() - lastTimestamp >= 1000) {
+    lastTimestamp = performance.now();
+    counter += counterGrowth;
+    updateText();
+  }
+  requestAnimationFrame(autoCounter);
+  checkCost();
+}
+autoCounter();
