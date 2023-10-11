@@ -8,10 +8,9 @@ let counter: number = 0;
 
 document.title = gameName;
 
-function updateCounter()
-{
-    counter++;
-    div.innerHTML = "Number of catnips produced: " + counter;
+function updateCounter() {
+  counter++;
+  div.innerHTML = "Number of catnips produced: " + counter;
 }
 
 const header = document.createElement("h1");
