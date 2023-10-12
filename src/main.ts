@@ -9,6 +9,8 @@ const unit1 = 0.1;
 const unit2 = 2.0;
 const unit3 = 50;
 
+const priceIncrease = 1.15;
+
 let upgrade1Cost: number = 10;
 let upgrade2Cost: number = 100;
 let upgrade3Cost: number = 1000;
@@ -16,7 +18,6 @@ let upgrade3Cost: number = 1000;
 let counter: number = 0;
 let counterGrowth: number = 0;
 let lastTimestamp: number = 0;
-let priceIncrease: number = 1.15;
 
 document.title = gameName;
 
