@@ -3,7 +3,7 @@ import "./style.css";
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "The Catnip Market";
-const buttonName = "🐱";
+const buttonName = "🐾 YEAH TAP YOUR PAWS";
 
 const unit1 = 0.1;
 const unit2 = 2.0;
@@ -26,11 +26,11 @@ function updateText() {
   growthText.innerHTML =
     "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
   upgradeButton.innerHTML =
-    "Upgrade 1 |0.1/sec| [Cost: " + upgrade1Cost.toFixed(1) + " Catnips]";
+    "Hire simple worker cat 🐱 |0.1/sec| [Cost: " + upgrade1Cost.toFixed(1) + " Catnips]";
   upgradeButton2.innerHTML =
-    "Upgrade 2 |2/sec| [Cost: " + upgrade2Cost.toFixed(1) + " Catnips]";
+    "Hire Hipster cat 🐱‍👓 |2/sec| [Cost: " + upgrade2Cost.toFixed(1) + " Catnips]";
   upgradeButton3.innerHTML =
-    "Upgrade 3 |50/sec| [Cost: " + upgrade3Cost.toFixed(1) + " Catnips]";
+    "Hire ninja cat 🐱‍👤 |50/sec| [Cost: " + upgrade3Cost.toFixed(1) + " Catnips]";
 }
 
 const header = document.createElement("h1");
@@ -57,6 +57,7 @@ app.append(growthText);
 
 // Upgrade buttons
 const upgradeButton = document.createElement("button");
+upgradeButton.title = "Just a simple cat. He's doing his best!";
 app.append(upgradeButton);
 
 upgradeButton.addEventListener("click", () => {
@@ -66,6 +67,7 @@ upgradeButton.addEventListener("click", () => {
 });
 
 const upgradeButton2 = document.createElement("button");
+upgradeButton2.title = "This cat is tech savvy. *Sips tea*";
 app.append(upgradeButton2);
 
 upgradeButton2.addEventListener("click", () => {
@@ -75,6 +77,7 @@ upgradeButton2.addEventListener("click", () => {
 });
 
 const upgradeButton3 = document.createElement("button");
+upgradeButton3.title = "OH YEAH YOU SEE WHAT DOES PAWS CAN DO?"
 app.append(upgradeButton3);
 
 upgradeButton3.innerHTML =
