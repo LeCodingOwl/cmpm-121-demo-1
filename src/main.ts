@@ -5,15 +5,7 @@ const app: HTMLDivElement = document.querySelector("#app")!;
 const gameName = "The Catnip Market";
 const buttonName = "🐾 YEAH TAP YOUR PAWS";
 
-const unit1 = 0.1;
-const unit2 = 2.0;
-const unit3 = 50;
-
 const priceIncrease = 1.15;
-
-let upgrade1Cost: number = 10;
-let upgrade2Cost: number = 100;
-let upgrade3Cost: number = 1000;
 
 let counter: number = 0;
 let counterGrowth: number = 0;
@@ -21,22 +13,49 @@ let lastTimestamp: number = 0;
 
 document.title = gameName;
 
+interface Item {
+  name: string;
+  cost: number;
+  rate: number;
+}
+
+const availableItems: Item[] = [
+  { name: "Hire simple worker cat 🐱", cost: 10, rate: 0.1 },
+  { name: "Hire Hipster cat 🐱‍👓", cost: 100, rate: 2 },
+  { name: "Hire ninja cat 🐱‍👤", cost: 1000, rate: 50 },
+];
+
 function updateText() {
   counterText.innerHTML = "Number of catnips produced: " + counter.toFixed();
   growthText.innerHTML =
     "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
   upgradeButton.innerHTML =
-    "Hire simple worker cat 🐱 |0.1/sec| [Cost: " +
-    upgrade1Cost.toFixed(1) +
-    " Catnips]";
+    availableItems[0].name +
+    " | " +
+    "Cost: " +
+    availableItems[0].cost.toFixed(1) +
+    " Catnips" +
+    " | " +
+    availableItems[0].rate.toFixed(1) +
+    "/sec";
   upgradeButton2.innerHTML =
-    "Hire Hipster cat 🐱‍👓 |2/sec| [Cost: " +
-    upgrade2Cost.toFixed(1) +
-    " Catnips]";
+    availableItems[1].name +
+    " | " +
+    "Cost: " +
+    availableItems[1].cost.toFixed(1) +
+    " Catnips" +
+    " | " +
+    availableItems[1].rate.toFixed(1) +
+    "/sec";
   upgradeButton3.innerHTML =
-    "Hire ninja cat 🐱‍👤 |50/sec| [Cost: " +
-    upgrade3Cost.toFixed(1) +
-    " Catnips]";
+    availableItems[2].name +
+    " | " +
+    "Cost: " +
+    availableItems[2].cost.toFixed(1) +
+    " Catnips" +
+    " | " +
+    availableItems[2].rate.toFixed(1) +
+    "/sec";
 }
 
 const header = document.createElement("h1");
@@ -67,9 +86,9 @@ upgradeButton.title = "Just a simple cat. He's doing his best!";
 app.append(upgradeButton);
 
 upgradeButton.addEventListener("click", () => {
-  counterGrowth += unit1;
-  counter -= upgrade1Cost;
-  upgrade1Cost += priceIncrease;
+  counterGrowth += availableItems[0].rate;
+  counter -= availableItems[0].cost;
+  availableItems[0].cost += priceIncrease;
 });
 
 const upgradeButton2 = document.createElement("button");
@@ -77,37 +96,35 @@ upgradeButton2.title = "This cat is tech savvy. *Sips tea*";
 app.append(upgradeButton2);
 
 upgradeButton2.addEventListener("click", () => {
-  counterGrowth += unit2;
-  counter -= upgrade2Cost;
-  upgrade2Cost += priceIncrease;
+  counterGrowth += availableItems[1].rate;
+  counter -= availableItems[1].cost;
+  availableItems[1].cost += priceIncrease;
 });
 
 const upgradeButton3 = document.createElement("button");
-upgradeButton3.title = "OH YEAH YOU SEE WHAT DOES PAWS CAN DO?";
+upgradeButton3.title = "OH YEAH YOU SEE WHAT THESE PAWS CAN DO?";
 app.append(upgradeButton3);
 
-upgradeButton3.innerHTML =
-  "Upgrade 3 |50/sec| [Cost: " + upgrade3Cost.toFixed(1) + " Catnips]";
 upgradeButton3.addEventListener("click", () => {
-  counterGrowth += unit3;
-  counter -= upgrade3Cost;
-  upgrade3Cost += priceIncrease;
+  counterGrowth += availableItems[2].rate;
+  counter -= availableItems[2].cost;
+  availableItems[2].cost += priceIncrease;
 });
 
 function checkCost() {
-  if (counter >= upgrade1Cost) {
+  if (counter >= availableItems[0].cost) {
     upgradeButton.disabled = false;
   } else {
     upgradeButton.disabled = true;
   }
 
-  if (counter >= upgrade2Cost) {
+  if (counter >= availableItems[1].cost) {
     upgradeButton2.disabled = false;
   } else {
     upgradeButton2.disabled = true;
   }
 
-  if (counter >= upgrade3Cost) {
+  if (counter >= availableItems[2].cost) {
     upgradeButton3.disabled = false;
   } else {
     upgradeButton3.disabled = true;
