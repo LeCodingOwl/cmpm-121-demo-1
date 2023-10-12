@@ -26,11 +26,17 @@ function updateText() {
   growthText.innerHTML =
     "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
   upgradeButton.innerHTML =
-    "Hire simple worker cat 🐱 |0.1/sec| [Cost: " + upgrade1Cost.toFixed(1) + " Catnips]";
+    "Hire simple worker cat 🐱 |0.1/sec| [Cost: " +
+    upgrade1Cost.toFixed(1) +
+    " Catnips]";
   upgradeButton2.innerHTML =
-    "Hire Hipster cat 🐱‍👓 |2/sec| [Cost: " + upgrade2Cost.toFixed(1) + " Catnips]";
+    "Hire Hipster cat 🐱‍👓 |2/sec| [Cost: " +
+    upgrade2Cost.toFixed(1) +
+    " Catnips]";
   upgradeButton3.innerHTML =
-    "Hire ninja cat 🐱‍👤 |50/sec| [Cost: " + upgrade3Cost.toFixed(1) + " Catnips]";
+    "Hire ninja cat 🐱‍👤 |50/sec| [Cost: " +
+    upgrade3Cost.toFixed(1) +
+    " Catnips]";
 }
 
 const header = document.createElement("h1");
@@ -77,7 +83,7 @@ upgradeButton2.addEventListener("click", () => {
 });
 
 const upgradeButton3 = document.createElement("button");
-upgradeButton3.title = "OH YEAH YOU SEE WHAT DOES PAWS CAN DO?"
+upgradeButton3.title = "OH YEAH YOU SEE WHAT DOES PAWS CAN DO?";
 app.append(upgradeButton3);
 
 upgradeButton3.innerHTML =
