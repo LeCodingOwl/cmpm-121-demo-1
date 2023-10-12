@@ -21,7 +21,8 @@ document.title = gameName;
 
 function updateText() {
   counterText.innerHTML = "Number of catnips produced: " + counter;
-  growthText.innerHTML = "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
+  growthText.innerHTML =
+    "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
 }
 
 const header = document.createElement("h1");
@@ -43,13 +44,15 @@ app.append(counterText);
 
 const growthText = document.createElement("div");
 
-growthText.innerHTML = "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
+growthText.innerHTML =
+  "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
 app.append(growthText);
 
 // Upgrade buttons
 const upgradeButton = document.createElement("button");
 
-upgradeButton.innerHTML = "Upgrade 1 |0.1/sec| [Cost: " + upgrade1Cost + " Catnips]";
+upgradeButton.innerHTML =
+  "Upgrade 1 |0.1/sec| [Cost: " + upgrade1Cost + " Catnips]";
 upgradeButton.addEventListener("click", () => {
   counterGrowth += unit1;
   counter -= upgrade1Cost;
@@ -59,7 +62,8 @@ app.append(upgradeButton);
 
 const upgradeButton2 = document.createElement("button");
 
-upgradeButton2.innerHTML = "Upgrade 2 |2.0/sec| [Cost: " + upgrade2Cost + " Catnips]";
+upgradeButton2.innerHTML =
+  "Upgrade 2 |2.0/sec| [Cost: " + upgrade2Cost + " Catnips]";
 upgradeButton2.addEventListener("click", () => {
   counterGrowth += unit2;
   counter -= upgrade2Cost;
@@ -69,14 +73,14 @@ app.append(upgradeButton2);
 
 const upgradeButton3 = document.createElement("button");
 
-upgradeButton3.innerHTML = "Upgrade 3 |50/sec| [Cost: " + upgrade3Cost + " Catnips]";
+upgradeButton3.innerHTML =
+  "Upgrade 3 |50/sec| [Cost: " + upgrade3Cost + " Catnips]";
 upgradeButton3.addEventListener("click", () => {
   counterGrowth += unit3;
   counter -= upgrade3Cost;
   updateText();
 });
 app.append(upgradeButton3);
-
 
 function checkCost() {
   if (counter >= upgrade1Cost) {
@@ -99,9 +103,9 @@ function checkCost() {
 }
 
 function autoCounter() {
-  if (performance.now() - lastTimestamp >= (1000/counterGrowth)) {
+  if (performance.now() - lastTimestamp >= 1000 / counterGrowth) {
     lastTimestamp = performance.now();
-    counter ++;
+    counter++;
     updateText();
   }
   requestAnimationFrame(autoCounter);
