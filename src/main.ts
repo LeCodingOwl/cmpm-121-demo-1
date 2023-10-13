@@ -9,9 +9,6 @@ const priceIncrease = 1.15;
 
 let counter: number = 0;
 let counterGrowth: number = 0;
-let lastTimestamp: number = 0;
-
-document.title = gameName;
 
 interface Item {
   name: string;
@@ -53,85 +50,15 @@ const availableItems: Item[] = [
   },
 ];
 
-function updateText() {
-  counterText.innerHTML = "Number of catnips produced: " + counter.toFixed();
-  growthText.innerHTML =
-    "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
-  upgradeButton.innerHTML =
-    availableItems[0].name +
-    " | " +
-    "Cost: " +
-    availableItems[0].cost.toFixed(1) +
-    " Catnips" +
-    " | " +
-    availableItems[0].rate.toFixed(1) +
-    "/sec" +
-    "<br><font size=-1>" +
-    availableItems[0].description;
-  upgradeButton2.innerHTML =
-    availableItems[1].name +
-    " | " +
-    "Cost: " +
-    availableItems[1].cost.toFixed(1) +
-    " Catnips" +
-    " | " +
-    availableItems[1].rate.toFixed(1) +
-    "/sec" +
-    "<br><font size=-1>" +
-    availableItems[1].description;
-  upgradeButton3.innerHTML =
-    availableItems[2].name +
-    " | " +
-    "Cost: " +
-    availableItems[2].cost.toFixed(1) +
-    " Catnips" +
-    " | " +
-    availableItems[2].rate.toFixed(1) +
-    "/sec" +
-    "<br><font size=-1>" +
-    availableItems[2].description;
-  upgradeButton4.innerHTML =
-    availableItems[3].name +
-    " | " +
-    "Cost: " +
-    availableItems[3].cost.toFixed(1) +
-    " Catnips" +
-    " | " +
-    availableItems[3].rate.toFixed(1) +
-    "/sec" +
-    "<br><font size=-1>" +
-    availableItems[3].description;
-  upgradeButton5.innerHTML =
-    availableItems[4].name +
-    " | " +
-    "Cost: " +
-    availableItems[4].cost.toFixed(1) +
-    " Catnips" +
-    " | " +
-    availableItems[4].rate.toFixed(1) +
-    "/sec" +
-    "<br><font size=-1>" +
-    availableItems[4].description;
-}
-
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-const button = document.createElement("button");
-button.innerHTML = buttonName;
-button.addEventListener("click", () => {
-  counter++;
-});
-app.append(button);
-
 const counterText = document.createElement("div");
-
 counterText.innerHTML = "Number of catnips produced: " + counter.toFixed();
 app.append(counterText);
 
 const growthText = document.createElement("div");
-
 growthText.innerHTML =
   "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
 app.append(growthText);
@@ -188,17 +115,7 @@ function checkCost() {
   } else {
     upgradeButton.disabled = true;
   }
-
-  if (counter >= availableItems[1].cost) {
-    upgradeButton2.disabled = false;
-  } else {
-    upgradeButton2.disabled = true;
   }
-
-  if (counter >= availableItems[2].cost) {
-    upgradeButton3.disabled = false;
-  } else {
-    upgradeButton3.disabled = true;
   }
 
   if (counter >= availableItems[3].cost) {
@@ -207,20 +124,26 @@ function checkCost() {
     upgradeButton4.disabled = true;
   }
 
-  if (counter >= availableItems[4].cost) {
-    upgradeButton5.disabled = false;
-  } else {
-    upgradeButton5.disabled = true;
-  }
+function checkCost (buttons: Item[])
+{
+  availableItems.forEach((item, i) => {
+    buttons[i].button.disabled = item.cost > counter;
+  })
 }
 
-function autoCounter() {
-  if (performance.now() - lastTimestamp >= 1000 / counterGrowth) {
-    lastTimestamp = performance.now();
-    counter++;
-  }
+let lastTimestamp: number = 0;
+function autoCounter(timestamp: number) {
+  const timePassed = timestamp - lastTimestamp;
+  lastTimestamp = timestamp;
   requestAnimationFrame(autoCounter);
-  checkCost();
+
+  counter += counterGrowth * (timePassed / 1000);
+  checkCost(availableItems);
+
+  counterText.innerHTML = "Number of catnips produced: " + counter.toFixed();
+  growthText.innerHTML = "Current growth rate of Catnip: " + counterGrowth.toFixed(1) + "/sec";
+}
+requestAnimationFrame(autoCounter);  checkCost();
   updateText();
 }
 autoCounter();
